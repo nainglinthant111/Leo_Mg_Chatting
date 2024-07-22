@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from "next/image";
-// @ts-ignore
+
 import Logo from '../../public/logo.png'
-import AuthForm from "./components/AuthForm"
+import Authentication from "@/app/components/Authentication";
 
 const Page = () => {
     return (
@@ -18,9 +18,8 @@ const Page = () => {
         ">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <Image src={Logo} alt="Logo" height={48} width={48} className="mx-auto w-auto"/>
-
             </div>
-            <AuthForm />
+            <Authentication />
         </div>
     );
 };
