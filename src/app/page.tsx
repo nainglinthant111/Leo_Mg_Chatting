@@ -3,8 +3,9 @@ import Image from "next/image";
 
 import Logo from '../../public/logo.png'
 import Authentication from "@/app/components/Authentication";
+import {getSession} from "next-auth/react";
 
-const Page = () => {
+const Page = async () => {
     return (
         <div className="
         flex
@@ -19,7 +20,7 @@ const Page = () => {
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <Image src={Logo} alt="Logo" height={48} width={48} className="mx-auto w-auto"/>
             </div>
-            <Authentication />
+             <Authentication />
         </div>
     );
 };
