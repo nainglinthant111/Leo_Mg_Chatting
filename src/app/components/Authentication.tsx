@@ -8,36 +8,39 @@ import {z} from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
 import AuthSocialButton from "@/app/components/AuthSocialButton";
 import {BsGithub} from "react-icons/bs";
-import {signIn} from "next-auth/react";
+import {useRouter} from "next/navigation";
 
 const scheme = z.object({
     email: z.string().email(),
     password: z.string().min(8)
 })
-
-
 type FormFields = z.infer<typeof scheme>
 
 const Authentication = () => {
     const {register, handleSubmit, setError, formState: {errors, isSubmitting}} = useForm<FormFields>({
         resolver: zodResolver(scheme)
     });
+    const router = useRouter()
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
             await new Promise((resolve) => setTimeout(resolve, 1000))
             sessionStorage.setItem('userData', JSON.stringify(data));
+            console.log(data)
         } catch (error) {
             setError("root", {
                 message: "This email is already taken",
             })
         }
-
     }
 
     const handleGoogleLogin = () => {
         console.log("google login")
     };
+
+    const navigateToRegister = () => {
+        router.push('/registration')
+    }
 
     return (
         <>
@@ -83,9 +86,9 @@ const Authentication = () => {
                     </div>
                     <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
                         <div>
-                            Already have an account?
+                            Don't have an account?
                         </div>
-                        <div className="underline cursor-pointer">
+                        <div className="underline cursor-pointer" onClick={navigateToRegister}>
                             Register
                         </div>
                     </div>
